@@ -58,7 +58,7 @@ export default function ContactForm() {
             <div className="page-hero-image">
               <div className="page-hero-image-glow" />
               <img
-                src="/images/hero-contact.jpg"
+                src="/images/hero-contact.webp"
                 alt="Book appointment at SAI SHREE HEALTH CARE, Cuttack"
                 className="relative z-10"
               />

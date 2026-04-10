@@ -22,7 +22,7 @@ export async function generateMetadata(props: { params: Params }): Promise<Metad
   const canonicalUrl = `${BASE_URL}/blogs/${blog.slug}`;
 
   return {
-    title: `${blog.title} | Dr. Sandeep K. Sahu – Endocrinologist Cuttack`,
+    title: `${blog.title} | Dr. Sahu, Cuttack`,
     description: blog.excerpt,
     keywords: [
       blog.category,
@@ -44,7 +44,7 @@ export async function generateMetadata(props: { params: Params }): Promise<Metad
       tags: [blog.category, "Endocrinology", "Cuttack", "Odisha"],
       images: [
         {
-          url: blog.image || "/images/hero-blogs.jpg",
+          url: blog.image || "/images/hero-blogs.webp",
           width: 1200,
           height: 630,
           alt: blog.title,
@@ -55,7 +55,7 @@ export async function generateMetadata(props: { params: Params }): Promise<Metad
       card: "summary_large_image",
       title: blog.title,
       description: blog.excerpt,
-      images: [blog.image || "/images/hero-blogs.jpg"],
+      images: [blog.image || "/images/hero-blogs.webp"],
     },
   };
 }
@@ -104,10 +104,10 @@ export default async function BlogDetailPage(props: { params: Params }) {
           "name": "SAI SHREE HEALTH CARE",
           "logo": {
             "@type": "ImageObject",
-            "url": `${BASE_URL}/images/home-hero.png`,
+            "url": `${BASE_URL}/images/home-hero.webp`,
           },
         },
-        "image": blog.image ? `${BASE_URL}${blog.image}` : `${BASE_URL}/images/hero-blogs.jpg`,
+        "image": blog.image ? `${BASE_URL}${blog.image}` : `${BASE_URL}/images/hero-blogs.webp`,
         "articleSection": blog.category,
         "keywords": `${blog.category}, endocrinology, Cuttack, Odisha, Dr Sandeep Sahu`,
         "about": {

@@ -33,7 +33,7 @@ const breadcrumbSchema = {
 };
 
 export const metadata: Metadata = {
-  title: "Best Endocrinologist in Cuttack | Dr. Sandeep K. Sahu – DM Endocrinology",
+  title: "Best Endocrinologist in Cuttack | Dr. Sandeep K. Sahu",
   description:
     "Dr. Sandeep K. Sahu – leading Endocrinologist & Assistant Professor at S.C.B. Medical College, Cuttack. Expert treatment for Diabetes, Thyroid disorders, PCOS, Obesity & Hormonal conditions in Cuttack, Odisha. Book an appointment at SAI SHREE HEALTH CARE today.",
   keywords: [
@@ -52,12 +52,12 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: BASE_URL,
-    title: "Best Endocrinologist in Cuttack | Dr. Sandeep K. Sahu – DM Endocrinology",
+    title: "Best Endocrinologist in Cuttack | Dr. Sandeep K. Sahu",
     description:
       "Expert treatment for Diabetes, Thyroid, PCOS, Obesity & Hormonal disorders in Cuttack, Odisha. Dr. Sandeep K. Sahu – Assistant Professor of Endocrinology at S.C.B. Medical College, Cuttack.",
     images: [
       {
-        url: "/images/home-hero.png",
+        url: "/images/home-hero.webp",
         width: 1200,
         height: 630,
         alt: "Dr. Sandeep K. Sahu – Best Endocrinologist in Cuttack, Odisha",
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     title: "Best Endocrinologist in Cuttack | Dr. Sandeep K. Sahu",
     description:
       "Expert treatment for Diabetes, Thyroid, PCOS, Obesity & Hormonal disorders in Cuttack, Odisha. Book your appointment at SAI SHREE HEALTH CARE.",
-    images: ["/images/home-hero.png"],
+    images: ["/images/home-hero.webp"],
   },
 };
 

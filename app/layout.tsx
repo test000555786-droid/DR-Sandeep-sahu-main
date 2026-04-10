@@ -14,7 +14,7 @@ const globalSchema = {
       "@id": `${BASE_URL}/#doctor`,
       "name": "Dr. Sandeep K. Sahu",
       "url": BASE_URL,
-      "image": `${BASE_URL}/images/home-hero.png`,
+      "image": `${BASE_URL}/images/home-hero.webp`,
       "description": "Dr. Sandeep K. Sahu is a highly experienced Endocrinologist and Assistant Professor of Endocrinology at S.C.B. Medical College and Hospital, Cuttack. He specialises in diabetes, thyroid disorders, PCOS, obesity, growth disorders, and metabolic diseases, serving patients across Cuttack and Odisha.",
       "medicalSpecialty": "Endocrinology",
       "jobTitle": "Assistant Professor of Endocrinology",
@@ -74,8 +74,8 @@ const globalSchema = {
       "url": BASE_URL,
       "telephone": "+91-7008512773",
       "email": "drsadeepsahu@saishreehealthcare.com",
-      "image": `${BASE_URL}/images/home-hero.png`,
-      "logo": `${BASE_URL}/images/home-hero.png`,
+      "image": `${BASE_URL}/images/home-hero.webp`,
+      "logo": `${BASE_URL}/images/home-hero.webp`,
       "description": "SAI SHREE HEALTH CARE is Cuttack's leading endocrinology clinic, led by Dr. Sandeep K. Sahu (DM Endocrinology). Expert care for diabetes, thyroid disorders, PCOS, obesity, growth disorders, and metabolic conditions — serving all of Odisha.",
       "priceRange": "₹₹",
       "currenciesAccepted": "INR",
@@ -123,8 +123,8 @@ const globalSchema = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Dr. Sandeep K. Sahu – Best Endocrinologist in Cuttack | SAI SHREE HEALTH CARE",
-    template: "%s | Dr. Sandeep K. Sahu – Endocrinologist in Cuttack",
+    default: "Dr. Sandeep K. Sahu | Endocrinologist, Cuttack",
+    template: "%s | Dr. Sahu – Endocrinologist, Cuttack",
   },
   description:
     "Dr. Sandeep K. Sahu – DM Endocrinologist & Assistant Professor at S.C.B. Medical College, Cuttack. Expert in Diabetes, Thyroid, PCOS, Obesity & Hormonal disorders. Book an appointment at SAI SHREE HEALTH CARE, Mangalabag, Cuttack.",
@@ -167,7 +167,7 @@ export const metadata: Metadata = {
       "Expert care for Diabetes, Thyroid, PCOS, Obesity & all Hormonal Disorders in Cuttack, Odisha. Dr. Sandeep K. Sahu – Assistant Professor of Endocrinology at S.C.B. Medical College, Cuttack.",
     images: [
       {
-        url: "/images/home-hero.png",
+        url: "/images/home-hero.webp",
         width: 1200,
         height: 630,
         alt: "Dr. Sandeep K. Sahu – Best Endocrinologist in Cuttack, Odisha",
@@ -179,7 +179,7 @@ export const metadata: Metadata = {
     title: "Best Endocrinologist in Cuttack | Dr. Sandeep K. Sahu",
     description:
       "Expert Endocrinologist in Cuttack. DM in Endocrinology. Specialist for Diabetes, Thyroid, PCOS, Obesity & Hormonal conditions. Book now at SAI SHREE HEALTH CARE.",
-    images: ["/images/home-hero.png"],
+    images: ["/images/home-hero.webp"],
   },
   robots: {
     index: true,
@@ -200,7 +200,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

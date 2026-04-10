@@ -6,6 +6,8 @@ import { ArrowLeft, Share2, Printer, Bookmark, Activity } from "lucide-react";
 import { patientResources } from "@/data/index";
 import CTASection from "@/components/sections/CTASection";
 
+const BASE_URL = "https://drsandeepkumarsahu.com";
+
 // Enables static generation for fast loading
 export function generateStaticParams() {
   return patientResources.map((resource) => ({
@@ -13,18 +15,37 @@ export function generateStaticParams() {
   }));
 }
 
-// Generate dynamic SEO metadata
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+type Params = Promise<{ slug: string }>;
+
+// Generate dynamic SEO metadata — async params (Next.js 15)
+export async function generateMetadata(props: { params: Params }): Promise<Metadata> {
+  const params = await props.params;
   const resource = patientResources.find((r) => r.slug === params.slug);
-  if (!resource) return {};
+  if (!resource) return { title: "Resource Not Found" };
+
+  const canonicalUrl = `${BASE_URL}/resources/${resource.slug}`;
 
   return {
-    title: `${resource.title} | Patient Resource | Dr. Sandeep K. Sahu`,
+    title: `${resource.title} | Patient Resource, Cuttack`,
     description: resource.description,
+    alternates: { canonical: canonicalUrl },
+    openGraph: {
+      url: canonicalUrl,
+      title: `${resource.title} | Dr. Sahu, Cuttack`,
+      description: resource.description,
+      images: [{ url: resource.image || "/images/hero-patient.webp", width: 1200, height: 630, alt: resource.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${resource.title} | Dr. Sahu, Cuttack`,
+      description: resource.description,
+      images: [resource.image || "/images/hero-patient.webp"],
+    },
   };
 }
 
-export default function ResourcePage({ params }: { params: { slug: string } }) {
+export default async function ResourcePage(props: { params: Params }) {
+  const params = await props.params;
   const resource = patientResources.find((r) => r.slug === params.slug);
 
   if (!resource) {
@@ -32,13 +53,30 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
   }
 
   // Gracefully fallback the hero image just in case
-  const bgImage = resource.image || "/images/hero-patient.png";
+  const bgImage = resource.image || "/images/hero-patient.webp";
 
   // Parse simple line breaks created in data structure
   const paragraphs = resource.content.split("\\n\\n").map(p => p.trim());
 
+  const canonicalUrl = `${BASE_URL}/resources/${resource.slug}`;
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL },
+      { "@type": "ListItem", "position": 2, "name": "Patient Corner", "item": `${BASE_URL}/patient-corner` },
+      { "@type": "ListItem", "position": 3, "name": resource.title, "item": canonicalUrl },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       <article className="bg-white selection:bg-primary-100 selection:text-primary-900">
 
         {/* Resource Hero */}
@@ -129,7 +167,7 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
                   </li>
                   <li className="flex items-start gap-4">
                     <div className="w-2.5 h-2.5 rounded-full bg-slate-400 mt-2.5 shrink-0" />
-                    <span className="leading-relaxed">Aways maintain an updated logbook of your symptoms, numbers, and physical patterns to discuss in future consultations.</span>
+                    <span className="leading-relaxed">Always maintain an updated logbook of your symptoms, numbers, and physical patterns to discuss in future consultations.</span>
                   </li>
                 </ul>
               </div>

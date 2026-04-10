@@ -45,7 +45,7 @@ export default function Navbar() {
         >
           {/* Logo Section */}
           <Link href="/" className="flex items-center gap-3 md:gap-4 group z-50">
-            {/* You can replace this whole block with an actual <img src="/logo.png" /> */}
+            {/* You can replace this whole block with an actual <img src="/logo.webp" /> */}
             <div className={`flex items-center transition-all ${scrolled ? 'scale-90' : 'scale-100'}`}>
               <div
                 className="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-gradient-animated flex items-center justify-center shadow-blue logo-bg relative overflow-hidden group-hover:shadow-teal transition-all"

@@ -28,7 +28,7 @@ export const services: Service[] = [
       "Diabetes is one of the most prevalent chronic conditions affecting millions globally. Dr. Sahu provides comprehensive diabetes care — from initial diagnosis through advanced glycemic management, complication screening, and lifestyle counseling. Whether you have Type 1, Type 2, or gestational diabetes, we create personalized treatment plans tailored to your unique needs. As a leading diabetes specialist in Cuttack serving patients across Odisha, Dr. Sahu combines evidence-based medicine with compassionate, patient-centred care.",
     icon: "activity",
     color: "#3B82F6",
-    image: "/images/specializations/diabetes-management.jpg",
+    image: "/images/specializations/diabetes-management.webp",
     symptoms: [
       "Frequent urination",
       "Excessive thirst",
@@ -96,7 +96,7 @@ export const services: Service[] = [
       "The thyroid gland plays a critical role in regulating your body's metabolism, energy, and overall well-being. Dr. Sahu specializes in the full spectrum of thyroid disorders, providing accurate diagnosis through advanced thyroid function testing, ultrasound, and when necessary, thyroid biopsies. Thyroid disease is highly prevalent across Odisha, and as one of Cuttack's leading thyroid specialists, Dr. Sahu provides comprehensive long-term care for every patient.",
     icon: "zap",
     color: "#8B5CF6",
-    image: "/images/specializations/thyroid-disorders.jpg",
+    image: "/images/specializations/thyroid-disorders.webp",
     symptoms: [
       "Weight changes",
       "Fatigue or excessive energy",
@@ -164,7 +164,7 @@ export const services: Service[] = [
       "Polycystic Ovary Syndrome (PCOS) is a common hormonal disorder affecting women of reproductive age. It can cause irregular periods, excess androgens, and polycystic ovaries. Dr. Sahu's approach addresses the underlying hormonal imbalances and metabolic dysfunction that drive PCOS. With dedicated PCOS treatment in Cuttack, Dr. Sahu helps women across Odisha regain hormonal balance, manage symptoms, and protect long-term metabolic health.",
     icon: "heart",
     color: "#EC4899",
-    image: "/images/specializations/pcod-pcos.jpg",
+    image: "/images/specializations/pcod-pcos.webp",
     symptoms: [
       "Irregular periods",
       "Excess hair growth (hirsutism)",
@@ -232,7 +232,7 @@ export const services: Service[] = [
       "Obesity is not a lifestyle choice — it is a complex metabolic condition with genetic, hormonal, and environmental components. Dr. Sahu provides evidence-based medical management of obesity, addressing the root hormonal causes and developing sustainable weight management strategies. As one of the few dedicated obesity specialists in Cuttack, Dr. Sahu helps patients across Odisha achieve lasting, medically supervised weight loss outcomes.",
     icon: "trending-down",
     color: "#10B981",
-    image: "/images/specializations/obesity-management.jpg",
+    image: "/images/specializations/obesity-management.webp",
     symptoms: [
       "BMI over 30",
       "Breathlessness on exertion",
@@ -300,7 +300,7 @@ export const services: Service[] = [
       "Growth disorders in children and adolescents require specialised endocrinological evaluation. Dr. Sahu assesses growth hormone deficiency, short stature, delayed puberty, and other growth abnormalities with precision testing and compassionate care. As a trusted growth disorder specialist in Cuttack, Dr. Sahu provides both paediatric and adult patients with tailored treatment plans designed to achieve the best possible outcomes.",
     icon: "bar-chart-2",
     color: "#F59E0B",
-    image: "/images/specializations/growth-disorders.jpg",
+    image: "/images/specializations/growth-disorders.webp",
     symptoms: [
       "Short stature for age",
       "Slow growth rate",
@@ -368,7 +368,7 @@ export const services: Service[] = [
       "The endocrine system regulates virtually every metabolic process in the body. Dr. Sahu manages a wide range of metabolic disorders including dyslipidaemia, metabolic syndrome, adrenal disorders, pituitary tumours, and calcium metabolism abnormalities. As one of the most experienced metabolism disorder specialists serving Cuttack and Odisha, Dr. Sahu delivers accurate diagnosis and personalised treatment for complex hormonal and metabolic conditions.",
     icon: "cpu",
     color: "#06B6D4",
-    image: "/images/specializations/metabolism-disorders.jpg",
+    image: "/images/specializations/metabolism-disorders.webp",
     symptoms: [
       "Unexplained weight changes",
       "Persistent fatigue",

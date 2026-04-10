@@ -4,7 +4,7 @@ import ContactForm from "./ContactForm";
 const BASE_URL = "https://drsandeepkumarsahu.com";
 
 export const metadata: Metadata = {
-  title: "Book an Appointment | Endocrinologist in Cuttack | Dr. Sandeep K. Sahu",
+  title: "Book Appointment | Endocrinologist, Cuttack",
   description:
     "Book an appointment with Dr. Sandeep K. Sahu — leading Endocrinologist in Cuttack. Visit SAI SHREE HEALTH CARE, Near Shreema Hospital, Ring Road, Mangalabag, Cuttack or call +91 7008512773.",
   keywords: [
@@ -19,16 +19,16 @@ export const metadata: Metadata = {
   },
   openGraph: {
     url: `${BASE_URL}/contact`,
-    title: "Book an Appointment | Endocrinologist in Cuttack | Dr. Sandeep K. Sahu",
+    title: "Book Appointment | Endocrinologist, Cuttack",
     description:
       "Book a consultation with Dr. Sandeep K. Sahu at SAI SHREE HEALTH CARE, Mangalabag, Cuttack. Expert endocrinology care for Diabetes, Thyroid, PCOS, Obesity & more.",
-    images: [{ url: "/images/hero-contact.jpg", width: 1200, height: 630, alt: "Book Appointment – SAI SHREE HEALTH CARE, Cuttack" }],
+    images: [{ url: "/images/hero-contact.webp", width: 1200, height: 630, alt: "Book Appointment – SAI SHREE HEALTH CARE, Cuttack" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Book an Appointment | Endocrinologist in Cuttack",
+    title: "Book Appointment | Endocrinologist, Cuttack",
     description: "Book a consultation at SAI SHREE HEALTH CARE, Cuttack with Dr. Sandeep K. Sahu. Call +91 7008512773.",
-    images: ["/images/hero-contact.jpg"],
+    images: ["/images/hero-contact.webp"],
   },
 };
 

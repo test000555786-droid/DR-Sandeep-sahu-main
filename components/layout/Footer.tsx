@@ -69,7 +69,10 @@ export default function Footer() {
                     key={label}
                     href="#"
                     aria-label={label}
-                    className="w-9 h-9 rounded-full bg-white/10 hover:bg-accent-500 flex items-center justify-center transition-colors"
+                    aria-disabled="true"
+                    role="link"
+                    tabIndex={-1}
+                    className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center opacity-50 pointer-events-none"
                   >
                     <Icon size={16} />
                   </a>

@@ -34,7 +34,7 @@ export async function generateMetadata(props: { params: Params }): Promise<Metad
   const canonicalUrl = `${BASE_URL}/services/${service.slug}`;
 
   return {
-    title: `${service.title} in Cuttack | Expert Treatment by Dr. Sandeep K. Sahu`,
+    title: `${service.title} | Endocrinologist, Cuttack`,
     description: `${service.shortDescription} Expert ${service.title.toLowerCase()} treatment in Cuttack, Odisha by Dr. Sandeep K. Sahu (DM Endocrinology) at SAI SHREE HEALTH CARE, Mangalabag, Cuttack.`,
     keywords: service.keywords,
     alternates: {
@@ -46,7 +46,7 @@ export async function generateMetadata(props: { params: Params }): Promise<Metad
       description: `${service.shortDescription} Get expert ${service.title.toLowerCase()} care in Cuttack and Odisha. Book a consultation with Dr. Sandeep K. Sahu at SAI SHREE HEALTH CARE.`,
       images: [
         {
-          url: service.image || "/images/hero-services.jpg",
+          url: service.image || "/images/hero-services.webp",
           width: 1200,
           height: 630,
           alt: `${service.title} Treatment – Dr. Sandeep K. Sahu, Endocrinologist Cuttack`,
@@ -57,7 +57,7 @@ export async function generateMetadata(props: { params: Params }): Promise<Metad
       card: "summary_large_image",
       title: `${service.title} Treatment in Cuttack | Dr. Sandeep K. Sahu`,
       description: `Expert ${service.title.toLowerCase()} treatment in Cuttack, Odisha. Book with Dr. Sandeep K. Sahu at SAI SHREE HEALTH CARE.`,
-      images: [service.image || "/images/hero-services.jpg"],
+      images: [service.image || "/images/hero-services.webp"],
     },
   };
 }
@@ -121,7 +121,6 @@ export default async function ServiceDetailPage(props: { params: Params }) {
         })),
       },
       {
-        "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL },

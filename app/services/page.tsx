@@ -17,7 +17,7 @@ const breadcrumbSchema = {
 };
 
 export const metadata: Metadata = {
-  title: "Endocrinology Services in Cuttack | Diabetes, Thyroid, PCOS & More | Dr. Sandeep K. Sahu",
+  title: "Endocrinology Services Cuttack | Dr. Sandeep K. Sahu",
   description:
     "Comprehensive endocrinology services in Cuttack: Diabetes management, Thyroid disorders, PCOS treatment, Obesity management, Growth disorders & Metabolic conditions. Expert care by Dr. Sandeep K. Sahu at SAI SHREE HEALTH CARE.",
   keywords: [
@@ -34,16 +34,16 @@ export const metadata: Metadata = {
   },
   openGraph: {
     url: `${BASE_URL}/services`,
-    title: "Endocrinology Services in Cuttack | Dr. Sandeep K. Sahu",
+    title: "Endocrinology Services Cuttack | Dr. Sandeep K. Sahu",
     description:
       "Expert endocrine care for Diabetes, Thyroid, PCOS, Obesity, Growth Disorders & Metabolic conditions in Cuttack, Odisha. Book a consultation with Dr. Sandeep K. Sahu.",
-    images: [{ url: "/images/hero-services.jpg", width: 1200, height: 630, alt: "Endocrinology Services – Dr. Sandeep K. Sahu, Cuttack" }],
+    images: [{ url: "/images/hero-services.webp", width: 1200, height: 630, alt: "Endocrinology Services – Dr. Sandeep K. Sahu, Cuttack" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Endocrinology Services in Cuttack | Dr. Sandeep K. Sahu",
+    title: "Endocrinology Services Cuttack | Dr. Sandeep K. Sahu",
     description: "Expert care for Diabetes, Thyroid, PCOS, Obesity & Metabolic disorders in Cuttack. Book now at SAI SHREE HEALTH CARE.",
-    images: ["/images/hero-services.jpg"],
+    images: ["/images/hero-services.webp"],
   },
 };
 
@@ -85,7 +85,7 @@ export default function ServicesPage() {
             <div className="page-hero-image">
               <div className="page-hero-image-glow" />
               <img
-                src="/images/hero-services.jpg"
+                src="/images/hero-services.webp"
                 alt="Endocrinology Services — Dr. Sandeep K. Sahu"
                 className="relative z-10"
               />
