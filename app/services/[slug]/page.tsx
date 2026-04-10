@@ -287,29 +287,43 @@ export default async function ServiceDetailPage(props: { params: Params }) {
             {/* Sidebar */}
             <div className="space-y-6">
               {/* Book CTA */}
-              <div className="card p-6 bg-blue-600 border-0 text-white">
-                <h3 className="text-xl font-bold font-heading mb-2">
-                  Book a Consultation
-                </h3>
-                <p className="text-blue-100 text-sm mb-5">
-                  Don't let symptoms go undiagnosed. Speak with Dr. Sahu today at SAI SHREE HEALTH CARE, Cuttack.
-                </p>
-                <a
-                  href={`https://wa.me/917008512773?text=${encodeURIComponent(`Hello, I want to book an appointment for ${service?.title || 'a Consultation'}.`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full bg-white text-blue-700 font-bold py-3 rounded-xl mb-3 hover:bg-blue-50 transition-colors"
-                >
-                  <Calendar size={16} />
-                  Book Appointment
-                </a>
-                <a
-                  href={`tel:${doctor.phone}`}
-                  className="flex items-center justify-center gap-2 w-full bg-blue-500/40 hover:bg-blue-500/60 text-white font-semibold py-3 rounded-xl transition-colors border border-white/20"
-                >
-                  <Phone size={16} />
-                  {doctor.phone}
-                </a>
+              <div className="card p-6 border-0 text-white relative overflow-hidden" style={{ background: 'linear-gradient(-45deg, #10395E 0%, #0BA898 50%, #10395E 100%)', backgroundSize: '200% 200%' }}>
+                {/* Decorative dot pattern */}
+                <div className="absolute inset-0 opacity-10 pointer-events-none">
+                  <svg width="100%" height="100%">
+                    <defs>
+                      <pattern id="sidebardots" width="30" height="30" patternUnits="userSpaceOnUse">
+                        <circle cx="15" cy="15" r="1.5" fill="white" />
+                      </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#sidebardots)" />
+                  </svg>
+                </div>
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold font-heading mb-2">
+                    Book a Consultation
+                  </h3>
+                  <p className="text-blue-100 text-sm mb-5">
+                    Don&apos;t let symptoms go undiagnosed. Speak with Dr. Sahu today at SAI SHREE HEALTH CARE, Cuttack.
+                  </p>
+                  <a
+                    href={`https://wa.me/917008512773?text=${encodeURIComponent(`Hello, I want to book an appointment for ${service?.title || 'a Consultation'}.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full font-bold py-3.5 rounded-full mb-3 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98]"
+                    style={{ backgroundColor: '#25D366' }}
+                  >
+                    <Calendar size={16} />
+                    Book Appointment
+                  </a>
+                  <a
+                    href={`tel:${doctor.phone}`}
+                    className="flex items-center justify-center gap-2 w-full bg-white/15 hover:bg-white/25 text-white font-semibold py-3.5 rounded-full transition-all duration-300 border border-white/30 hover:-translate-y-0.5"
+                  >
+                    <Phone size={16} />
+                    {doctor.phone}
+                  </a>
+                </div>
               </div>
 
               {/* Doctor info */}

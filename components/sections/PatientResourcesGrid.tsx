@@ -16,7 +16,7 @@ const iconMap: Record<string, any> = {
 
 export default function PatientResourcesGrid({ resources }: { resources: any[] }) {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, amount: 0.1 });
+  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
   return (
     <section className="relative py-24 overflow-hidden bg-slate-50" ref={containerRef}>
@@ -76,6 +76,7 @@ export default function PatientResourcesGrid({ resources }: { resources: any[] }
                       src={bgImage}
                       alt={resource.title}
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       loading={isFeatured ? "eager" : "lazy"}
                       className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
                     />

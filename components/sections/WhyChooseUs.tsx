@@ -33,7 +33,7 @@ const reasons = [
 
 export default function WhyChooseUs() {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, amount: 0.1 });
+  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
   return (
     <section className="relative py-24 overflow-hidden bg-slate-50" ref={containerRef}>

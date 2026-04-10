@@ -113,6 +113,8 @@ export default function HeroSection() {
                   width={600}
                   height={720}
                   priority
+                  fetchPriority="high"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                   className="hero-doctor-img"
                 />
               </div>

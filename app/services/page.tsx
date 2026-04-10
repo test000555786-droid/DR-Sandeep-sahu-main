@@ -88,6 +88,10 @@ export default function ServicesPage() {
                 src="/images/hero-services.webp"
                 alt="Endocrinology Services — Dr. Sandeep K. Sahu"
                 className="relative z-10"
+                width={800}
+                height={600}
+                decoding="async"
+                fetchPriority="high"
               />
             </div>
           </div>

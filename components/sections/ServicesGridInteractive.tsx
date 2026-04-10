@@ -16,7 +16,7 @@ const iconMap: Record<string, any> = {
 export default function ServicesGridInteractive({ services }: { services: any[] }) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, amount: 0.1 });
+  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
   return (
     <section className="relative py-24 overflow-hidden bg-slate-50" ref={containerRef}>
@@ -37,90 +37,102 @@ export default function ServicesGridInteractive({ services }: { services: any[] 
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 auto-rows-min">
+        {/* Uniform balanced grid — no oversized cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => {
             const Icon = iconMap[service.icon] || Activity;
             const isExpanded = expandedId === service.slug;
-
-            // Uneven, dynamic grid sizing rules
-            let gridClass = "md:col-span-1";
-            let isFeatured = false;
-            
-            if (index === 0) {
-              gridClass = "md:col-span-2 lg:col-span-2 lg:row-span-2"; // Featured top-left huge card
-              isFeatured = true;
-            } else if (index === 4) {
-              gridClass = "md:col-span-2 lg:col-span-2"; // Wider card near bottom
-            }
+            const isFeatured = index === 0;
 
             return (
               <motion.div
                 layout
                 key={service.slug}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.1 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={!isExpanded ? { y: -6, scale: 1.015 } : {}}
+                transition={{ duration: 0.5, delay: 0.08 * index, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={!isExpanded ? { y: -4 } : {}}
                 onClick={() => setExpandedId(isExpanded ? null : service.slug)}
-                className={`group relative backdrop-blur-xl border rounded-3xl overflow-hidden cursor-pointer shadow-blue hover:shadow-2xl transition-all duration-500 ${gridClass} ${
+                className={`group relative bg-white border rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 flex flex-col ${
                   isFeatured 
-                    ? "bg-gradient-to-br from-white to-primary-50/60 border-primary-100" 
-                    : "bg-white/70 border-white/80"
+                    ? "border-primary-200/70 shadow-md hover:shadow-xl ring-1 ring-primary-100/50" 
+                    : "border-slate-200/60 shadow-sm hover:shadow-lg hover:border-primary-200/50"
                 }`}
               >
-                {/* Inner Glow */}
-                <div className={`absolute inset-0 transition-opacity duration-500 pointer-events-none ${isExpanded ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} ${isFeatured ? 'bg-gradient-to-br from-primary-100/40 to-transparent' : 'bg-gradient-to-br from-primary-50/50 to-transparent'}`} />
-                
-                <motion.div layout className={`relative z-10 flex flex-col h-full ${isFeatured ? 'p-8 lg:p-12' : 'p-6 lg:p-8'}`}>
+                {/* Top accent bar — uses each service's color */}
+                <div 
+                  className="h-1 w-full"
+                  style={{ background: `linear-gradient(90deg, ${service.color || '#1B6CA8'}, ${service.color ? service.color + '90' : '#0BA898'})` }}
+                />
+
+                <motion.div layout className="relative z-10 flex flex-col flex-1 p-5 lg:p-6">
                   
-                  {/* Top content row flex */}
-                  <div className={`flex items-start gap-4 lg:gap-6 ${isFeatured ? 'mb-6' : 'mb-4'}`}>
-                    {/* Icon Box */}
+                  {/* Row 1: Icon + Featured badge */}
+                  <div className="flex items-center justify-between mb-4">
                     <motion.div 
                       layout
-                      className={`rounded-2xl flex items-center justify-center shrink-0 transition-all duration-500 group-hover:rotate-6 group-hover:scale-110 shadow-sm ${
-                        isFeatured ? 'w-20 h-20 bg-gradient-to-br from-primary-600 to-accent-500 text-white shadow-md' : 'w-14 h-14 bg-white border border-slate-100 text-primary-600 group-hover:bg-primary-50 group-hover:border-primary-100'
+                      className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-all duration-400 group-hover:scale-110 group-hover:rotate-3 ${
+                        isFeatured 
+                          ? 'bg-gradient-to-br from-primary-600 to-accent-500 text-white shadow-md' 
+                          : 'border border-slate-100 group-hover:border-primary-200 group-hover:bg-primary-50'
                       }`}
+                      style={!isFeatured ? { backgroundColor: `${service.color}0A`, color: service.color } : {}}
                     >
-                      <Icon size={isFeatured ? 32 : 24} />
+                      <Icon size={20} />
                     </motion.div>
-                    
-                    <div className="flex-1 mt-1">
-                      <motion.h2 layout className={`font-bold text-slate-800 font-heading mb-2 leading-tight ${isFeatured ? 'text-3xl lg:text-4xl' : 'text-xl lg:text-2xl'}`}>
-                        {service.title}
-                      </motion.h2>
-                      {isFeatured && (
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent-50 text-accent-700 text-xs font-bold uppercase tracking-wider mb-2 border border-accent-100">
-                          Featured Speciality
-                        </div>
-                      )}
-                    </div>
-                  </div>
 
-                  <motion.p layout className={`text-slate-600 leading-relaxed ${isFeatured ? 'text-lg lg:text-xl max-w-2xl' : 'text-sm'}`}>
+                    {isFeatured && (
+                      <span className="px-2.5 py-0.5 rounded-full bg-accent-50 text-accent-700 text-[10px] font-bold uppercase tracking-wider border border-accent-100">
+                        Featured
+                      </span>
+                    )}
+                  </div>
+                  
+                  {/* Row 2: Title */}
+                  <motion.h2 layout className="text-lg font-bold text-slate-800 font-heading leading-snug mb-2">
+                    {service.title}
+                  </motion.h2>
+
+                  {/* Row 3: Description */}
+                  <motion.p layout className="text-sm text-slate-500 leading-relaxed mb-5 line-clamp-3">
                     {service.shortDescription}
                   </motion.p>
+
+                  {/* Separator */}
+                  <div className="w-full h-px bg-slate-100 group-hover:bg-primary-100/80 transition-colors duration-300" />
                   
-                  {/* Default collapsed symptoms pills */}
+                  {/* Row 4: Tags + CTA — pushed to bottom */}
                   <AnimatePresence mode="popLayout">
                     {!isExpanded && (
                       <motion.div 
-                        initial={{ opacity: 0, scale: 0.95 }}
+                        initial={{ opacity: 0, scale: 0.97 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
+                        exit={{ opacity: 0, scale: 0.97 }}
                         transition={{ duration: 0.2 }}
-                        className={`flex flex-wrap gap-2 mt-auto pt-6`}
+                        className="mt-auto pt-4 flex flex-col gap-3"
                       >
-                        {service.symptoms.slice(0, isFeatured ? 5 : 2).map((sym: string) => (
-                          <span key={sym} className={`px-3 py-1.5 rounded-full border bg-white/50 text-slate-600 ${isFeatured ? 'text-sm border-primary-100' : 'text-xs border-slate-200'}`}>
-                            {sym}
-                          </span>
-                        ))}
-                        {service.symptoms.length > (isFeatured ? 5 : 2) && (
-                          <span className={`flex items-center gap-1 font-semibold px-3 py-1.5 rounded-full border border-primary-100 bg-primary-50 text-primary-600 ${isFeatured ? 'text-sm' : 'text-xs'} group-hover:bg-primary-600 group-hover:text-white transition-colors`}>
-                            +{service.symptoms.length - (isFeatured ? 5 : 2)} details <ChevronDown size={14} className="group-hover:translate-y-0.5 transition-transform" />
-                          </span>
-                        )}
+                        {/* Symptom chips */}
+                        <div className="flex flex-wrap gap-1.5">
+                          {service.symptoms.slice(0, 3).map((sym: string) => (
+                            <span key={sym} className="px-2 py-0.5 rounded-md bg-slate-50 text-slate-500 border border-slate-100 text-[11px]">
+                              {sym}
+                            </span>
+                          ))}
+                          {service.symptoms.length > 3 && (
+                            <span className="flex items-center gap-0.5 font-semibold px-2 py-0.5 rounded-md border border-primary-100 bg-primary-50 text-primary-600 text-[11px] group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300">
+                              +{service.symptoms.length - 3} more <ChevronDown size={11} className="group-hover:translate-y-0.5 transition-transform" />
+                            </span>
+                          )}
+                        </div>
+
+                        {/* CTA link */}
+                        <Link 
+                          href={`/services/${service.slug}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary-600 group-hover:text-primary-700 transition-colors"
+                        >
+                          Learn more <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform duration-300" />
+                        </Link>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -135,14 +147,14 @@ export default function ServicesGridInteractive({ services }: { services: any[] 
                         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="pt-6 mt-6 border-t border-slate-200/60">
-                          <h4 className="font-bold text-slate-800 font-heading mb-4 flex items-center gap-2">
-                            <Activity size={16} className="text-primary-600" /> Complete Treatment Scope
+                        <div className="pt-4 mt-4">
+                          <h4 className="font-bold text-slate-800 font-heading mb-3 flex items-center gap-2 text-sm">
+                            <Activity size={14} className="text-primary-600" /> Treatment Scope
                           </h4>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4 mb-8">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-3 mb-5">
                             {service.symptoms.map((sym: string) => (
                               <div key={sym} className="flex items-start gap-2 text-sm text-slate-600">
-                                <CheckCircle2 size={16} className="text-accent-500 shrink-0 mt-0.5" />
+                                <CheckCircle2 size={14} className="text-accent-500 shrink-0 mt-0.5" />
                                 <span>{sym}</span>
                               </div>
                             ))}
@@ -150,12 +162,12 @@ export default function ServicesGridInteractive({ services }: { services: any[] 
                           
                           <Link 
                             href={`/services/${service.slug}`}
-                            onClick={(e) => e.stopPropagation()} // prevent collapsing when clicking link
-                            className="inline-flex items-center justify-center w-full sm:w-auto gap-2 bg-gradient-animated text-white font-bold px-8 py-3.5 rounded-xl transition-all duration-300 shadow-blue hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary-600/30 active:scale-95"
+                            onClick={(e) => e.stopPropagation()}
+                            className="inline-flex items-center justify-center w-full gap-2 text-white font-bold px-6 py-2.5 rounded-full transition-all duration-300 shadow-md hover:-translate-y-0.5 hover:shadow-lg active:scale-95 text-sm"
                             style={{ background: 'linear-gradient(-45deg, #1B6CA8 0%, #0BA898 50%, #1B6CA8 100%)' }}
                           >
-                            Explore Comprehensive Deep-Dive
-                            <ArrowRight size={16} />
+                            View Full Details
+                            <ArrowRight size={14} />
                           </Link>
                         </div>
                       </motion.div>

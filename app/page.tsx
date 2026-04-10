@@ -1,12 +1,33 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutPreview from "@/components/sections/AboutPreview";
-import ServicesSection from "@/components/sections/ServicesSection";
-import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import StatsSection from "@/components/sections/StatsSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import BlogPreview from "@/components/sections/BlogPreview";
-import CTASection from "@/components/sections/CTASection";
+
+const ServicesSection = dynamic(() => import("@/components/sections/ServicesSection"), {
+  ssr: true,
+  loading: () => null,
+});
+
+const WhyChooseUs = dynamic(() => import("@/components/sections/WhyChooseUs"), {
+  ssr: true,
+  loading: () => null,
+});
+
+const TestimonialsSection = dynamic(() => import("@/components/sections/TestimonialsSection"), {
+  ssr: true,
+  loading: () => null,
+});
+
+const BlogPreview = dynamic(() => import("@/components/sections/BlogPreview"), {
+  ssr: true,
+  loading: () => null,
+});
+
+const CTASection = dynamic(() => import("@/components/sections/CTASection"), {
+  ssr: true,
+  loading: () => null,
+});
 import { faqs } from "@/data/index";
 
 const BASE_URL = "https://drsandeepkumarsahu.com";

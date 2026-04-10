@@ -14,7 +14,7 @@ const iconMap: Record<string, any> = {
 
 export default function StatsSection() {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, amount: 0.2 });
+  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
   return (
     <section 

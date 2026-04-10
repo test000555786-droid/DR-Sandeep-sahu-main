@@ -81,6 +81,10 @@ export default function PatientCornerContent() {
                 src="/images/hero-patient.webp"
                 alt="Patient care at SAI SHREE HEALTH CARE"
                 className="relative z-10"
+                width={800}
+                height={600}
+                decoding="async"
+                fetchPriority="high"
               />
             </div>
           </div>

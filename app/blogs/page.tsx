@@ -89,6 +89,10 @@ export default function BlogsPage() {
                 src="/images/hero-blogs.webp"
                 alt="Health & Wellness Blog — Dr. Sandeep K. Sahu"
                 className="relative z-10"
+                width={800}
+                height={600}
+                decoding="async"
+                fetchPriority="high"
               />
             </div>
           </div>
@@ -108,7 +112,7 @@ export default function BlogsPage() {
                 className="card p-0 overflow-hidden flex flex-col md:flex-row group"
               >
                 <div className="md:w-2/5 h-56 md:h-auto bg-gradient-to-br from-primary-100 to-primary-50 flex items-center justify-center relative overflow-hidden shrink-0">
-                  <img src="/images/hero-blogs.webp" alt={featured.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img src={featured.image} alt={featured.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-60" />
                   <span className={`absolute top-4 left-4 z-10 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm backdrop-blur-md ${categoryColors[featured.category] || "bg-white/90 text-slate-700"}`}>
                     {featured.category}
@@ -148,7 +152,7 @@ export default function BlogsPage() {
             {blogs.map((blog) => (
               <Link key={blog.slug} href={`/blogs/${blog.slug}`} className="blog-card group">
                 <div className="h-44 bg-gradient-to-br from-slate-50 to-primary-50 flex items-center justify-center relative overflow-hidden">
-                  <img src="/images/hero-patient.webp" alt={blog.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img src={blog.image} alt={blog.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-40 mix-blend-multiply" />
                   <span className={`absolute top-3 left-3 z-10 text-xs font-bold px-2.5 py-1 rounded-full shadow-sm backdrop-blur-md ${categoryColors[blog.category] || "bg-white/90 text-slate-700"}`}>
                     {blog.category}

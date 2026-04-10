@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Share2, Printer, Bookmark, Activity } from "lucide-react";
+import { ArrowLeft, Activity } from "lucide-react";
 import { patientResources } from "@/data/index";
 import CTASection from "@/components/sections/CTASection";
 
@@ -79,56 +79,52 @@ export default async function ResourcePage(props: { params: Params }) {
 
       <article className="bg-white selection:bg-primary-100 selection:text-primary-900">
 
-        {/* Resource Hero */}
-        <section className="relative w-full h-[60vh] min-h-[500px] flex items-end pb-12 pt-32">
-          {/* Background image optimized with next/image */}
-          <div className="absolute inset-0">
+        {/* Resource Hero — compact, content-focused */}
+        <section className="relative w-full min-h-[280px] md:min-h-[320px] lg:min-h-[360px] flex items-end py-10 md:py-14 pt-28 md:pt-32">
+          {/* Background image — subtly scaled with strong overlay for readability */}
+          <div className="absolute inset-0 overflow-hidden">
             <Image
               src={bgImage}
               alt={resource.title}
               fill
               priority
-              className="object-cover object-top"
+              className="object-cover object-top scale-95 transition-transform duration-700"
               sizes="100vw"
             />
-            {/* Double-layered gradient overlay to guarantee text readability against any image */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-slate-900/10 opacity-90" />
-            <div className="absolute inset-0 bg-primary-900/20 mix-blend-multiply opacity-50" />
+            {/* Multi-layer overlay for a refined, non-distracting background */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/70 to-slate-900/30" />
+            <div className="absolute inset-0 bg-black/50" />
+            <div className="absolute inset-0 bg-primary-900/15 mix-blend-multiply" />
           </div>
 
-          {/* Hero Content positioned at the bottom relative to page scroll */}
+          {/* Hero Content — balanced readability */}
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 w-full animate-fade-in-up">
-            <Link href="/patient-corner" className="inline-flex items-center gap-2 text-slate-300 hover:text-white transition-colors mb-6 text-sm font-bold tracking-widest uppercase">
+            <Link href="/patient-corner" className="inline-flex items-center gap-2 text-slate-300 hover:text-white transition-colors mb-4 text-sm font-bold tracking-widest uppercase">
               <ArrowLeft size={16} /> Back to Resources
             </Link>
 
-            <div className="mb-6 flex gap-3 items-center">
-              <span className="px-3.5 py-1.5 bg-white/20 backdrop-blur-md rounded-full text-white text-xs font-extrabold border border-white/30 uppercase tracking-widest shadow-sm">
+            <div className="mb-4 flex gap-3 items-center">
+              <span className="px-3.5 py-1.5 bg-white/15 backdrop-blur-md rounded-full text-white text-xs font-extrabold border border-white/20 uppercase tracking-widest shadow-sm">
                 {resource.category}
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white font-heading leading-tight mb-6 drop-shadow-lg">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white font-heading leading-tight mb-4 drop-shadow-lg">
               {resource.title}
             </h1>
-            <p className="text-lg md:text-xl text-slate-200 max-w-2xl leading-relaxed font-medium">
+            <p className="text-base md:text-lg text-slate-200 max-w-2xl leading-relaxed font-medium">
               {resource.description}
             </p>
           </div>
         </section>
 
-        {/* Action bar sticky wrapper */}
+        {/* Author & Review metadata bar */}
         <div className="border-b border-slate-100 bg-slate-50 sticky top-[72px] lg:top-[88px] z-40 transition-shadow hidden sm:block">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between text-sm text-slate-500 font-bold uppercase tracking-wider">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center text-sm text-slate-500 font-bold uppercase tracking-wider">
             <div className="flex items-center gap-6">
               <span>Dr. Sandeep K. Sahu</span>
               <span className="text-slate-300">•</span>
               <span>Reviewed: Clinical Guide</span>
-            </div>
-            <div className="flex items-center gap-6">
-              <button className="flex items-center gap-2 hover:text-primary-600 transition-colors"><Share2 size={16} /> Share</button>
-              <button className="flex items-center gap-2 hover:text-primary-600 transition-colors hidden md:flex"><Printer size={16} /> Print</button>
-              <button className="flex items-center gap-2 hover:text-primary-600 transition-colors"><Bookmark size={16} /> Save</button>
             </div>
           </div>
         </div>

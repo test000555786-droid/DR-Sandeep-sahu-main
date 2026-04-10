@@ -99,6 +99,10 @@ export default function AboutPage() {
                 src="/images/hero-about.webp"
                 alt="Dr. Sandeep K. Sahu — Endocrinologist Cuttack"
                 className="relative z-10"
+                width={800}
+                height={600}
+                decoding="async"
+                fetchPriority="high"
               />
             </div>
           </div>

@@ -61,6 +61,10 @@ export default function ContactForm() {
                 src="/images/hero-contact.webp"
                 alt="Book appointment at SAI SHREE HEALTH CARE, Cuttack"
                 className="relative z-10"
+                width={800}
+                height={600}
+                decoding="async"
+                fetchPriority="high"
               />
             </div>
           </div>

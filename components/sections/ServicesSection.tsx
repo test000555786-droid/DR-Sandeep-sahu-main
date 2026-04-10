@@ -37,7 +37,7 @@ export default function ServicesSection() {
               <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
-                className="relative overflow-hidden group rounded-3xl h-[360px] flex items-end shadow-lg"
+                className="relative overflow-hidden group rounded-2xl h-[300px] flex items-end shadow-lg"
               >
                 {/* Background Image */}
                 {service.image && (
@@ -45,6 +45,8 @@ export default function ServicesSection() {
                     src={service.image}
                     alt={service.title}
                     loading="lazy"
+                    width={400}
+                    height={400}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110"
                   />
                 )}
@@ -54,13 +56,13 @@ export default function ServicesSection() {
                 <div className="absolute inset-0 bg-primary-900/50 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Content relative wrapper */}
-                <div className="relative z-10 w-full p-6 text-left">
+                <div className="relative z-10 w-full p-5 text-left">
                   {/* Icon & Title */}
                   <div className="flex items-center gap-3 transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-2">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-white/20 backdrop-blur-md border border-white/20 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] shrink-0 transition-colors group-hover:bg-primary-500/80 group-hover:border-primary-400/50">
-                      <Icon size={24} />
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-white/20 backdrop-blur-md border border-white/20 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] shrink-0 transition-colors group-hover:bg-primary-500/80 group-hover:border-primary-400/50">
+                      <Icon size={20} />
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white font-heading drop-shadow-sm leading-tight">
+                    <h3 className="text-lg sm:text-xl font-bold text-white font-heading drop-shadow-sm leading-tight">
                       {service.title}
                     </h3>
                   </div>
