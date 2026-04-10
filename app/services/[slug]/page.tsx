@@ -3,10 +3,13 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   Activity, Zap, Heart, TrendingDown, BarChart2, Cpu,
-  CheckCircle, AlertCircle, ArrowRight, ChevronLeft, Phone, Calendar
+  CheckCircle, AlertCircle, ArrowRight, ChevronLeft, Phone, Calendar, HelpCircle
 } from "lucide-react";
 import { services } from "@/data/services";
+import { blogs } from "@/data/index";
 import { doctor } from "@/data/doctor";
+
+const BASE_URL = "https://drsandeepkumarsahu.com";
 
 const iconMap: Record<string, any> = {
   activity: Activity,
@@ -27,17 +30,40 @@ export async function generateMetadata(props: { params: Params }): Promise<Metad
   const params = await props.params;
   const service = services.find((s) => s.slug === params.slug);
   if (!service) return { title: "Service Not Found" };
+
+  const canonicalUrl = `${BASE_URL}/services/${service.slug}`;
+
   return {
-    title: `${service.title} Treatment in Cuttack | Dr. Sandeep K. Sahu`,
-    description: service.shortDescription,
+    title: `${service.title} in Cuttack | Expert Treatment by Dr. Sandeep K. Sahu`,
+    description: `${service.shortDescription} Expert ${service.title.toLowerCase()} treatment in Cuttack, Odisha by Dr. Sandeep K. Sahu (DM Endocrinology) at SAI SHREE HEALTH CARE, Mangalabag, Cuttack.`,
+    keywords: service.keywords,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      url: canonicalUrl,
+      title: `${service.title} Treatment in Cuttack | Dr. Sandeep K. Sahu – DM Endocrinologist`,
+      description: `${service.shortDescription} Get expert ${service.title.toLowerCase()} care in Cuttack and Odisha. Book a consultation with Dr. Sandeep K. Sahu at SAI SHREE HEALTH CARE.`,
+      images: [
+        {
+          url: service.image || "/images/hero-services.jpg",
+          width: 1200,
+          height: 630,
+          alt: `${service.title} Treatment – Dr. Sandeep K. Sahu, Endocrinologist Cuttack`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${service.title} Treatment in Cuttack | Dr. Sandeep K. Sahu`,
+      description: `Expert ${service.title.toLowerCase()} treatment in Cuttack, Odisha. Book with Dr. Sandeep K. Sahu at SAI SHREE HEALTH CARE.`,
+      images: [service.image || "/images/hero-services.jpg"],
+    },
   };
 }
 
 export default async function ServiceDetailPage(props: { params: Params }) {
   const params = await props.params;
-  
-  // Debug check requested by user
-  console.log(params.slug);
 
   const service = services.find((s) => s.slug === params.slug);
   if (!service) notFound();
@@ -45,8 +71,74 @@ export default async function ServiceDetailPage(props: { params: Params }) {
   const Icon = iconMap[service.icon] || Activity;
   const otherServices = services.filter((s) => s.slug !== params.slug).slice(0, 3);
 
+  // Related blogs by keyword matching
+  const relatedBlogs = blogs
+    .filter((b) =>
+      service.keywords.some((kw) =>
+        b.title.toLowerCase().includes(kw.split(" ")[0].toLowerCase()) ||
+        b.category.toLowerCase() === service.title.split(" ")[0].toLowerCase()
+      )
+    )
+    .slice(0, 2);
+
+  const canonicalUrl = `${BASE_URL}/services/${service.slug}`;
+
+  // MedicalCondition + FAQPage JSON-LD
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MedicalWebPage",
+        "@id": `${canonicalUrl}#webpage`,
+        "url": canonicalUrl,
+        "name": `${service.title} Treatment in Cuttack`,
+        "description": service.shortDescription,
+        "specialty": "Endocrinology",
+        "about": {
+          "@type": "MedicalCondition",
+          "name": service.title,
+          "description": service.fullDescription,
+          "possibleTreatment": service.treatments.map((t) => ({
+            "@type": "MedicalTherapy",
+            "name": t,
+          })),
+          "signOrSymptom": service.symptoms.map((s) => ({
+            "@type": "MedicalSign",
+            "name": s,
+          })),
+        },
+        "author": { "@id": `${BASE_URL}/#doctor` },
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": service.faqs.map((faq) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer,
+          },
+        })),
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL },
+          { "@type": "ListItem", "position": 2, "name": "Services", "item": `${BASE_URL}/services` },
+          { "@type": "ListItem", "position": 3, "name": service.title, "item": canonicalUrl },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+
       {/* Hero */}
       <section className="page-hero">
         <div className="absolute inset-0 hero-bg" />
@@ -67,7 +159,7 @@ export default async function ServiceDetailPage(props: { params: Params }) {
                 <Icon size={30} />
               </div>
               <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4 font-heading">
-                {service.title}
+                {service.title} <span className="text-slate-500 font-normal text-3xl">in Cuttack</span>
               </h1>
               <p className="text-slate-600 text-lg leading-relaxed">
                 {service.shortDescription}
@@ -146,6 +238,51 @@ export default async function ServiceDetailPage(props: { params: Params }) {
                   ))}
                 </div>
               </div>
+
+              {/* FAQ Section — SEO rich results */}
+              <div>
+                <h2 className="text-2xl font-bold text-slate-900 mb-5 font-heading flex items-center gap-2">
+                  <HelpCircle size={22} className="text-blue-500" />
+                  Frequently Asked Questions
+                </h2>
+                <div className="space-y-4">
+                  {service.faqs.map((faq, i) => (
+                    <div
+                      key={i}
+                      className="border border-slate-200 rounded-xl p-5 bg-slate-50/50"
+                    >
+                      <h3 className="font-semibold text-slate-800 mb-2 font-heading text-base">
+                        {faq.question}
+                      </h3>
+                      <p className="text-slate-600 text-sm leading-relaxed">{faq.answer}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Related Blogs — internal linking */}
+              {relatedBlogs.length > 0 && (
+                <div>
+                  <h2 className="text-xl font-bold text-slate-900 mb-4 font-heading">
+                    Related Health Articles
+                  </h2>
+                  <div className="space-y-3">
+                    {relatedBlogs.map((blog) => (
+                      <Link
+                        key={blog.slug}
+                        href={`/blogs/${blog.slug}`}
+                        className="flex items-center gap-3 p-4 rounded-xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/30 transition-colors group"
+                      >
+                        <div className="w-2 h-2 rounded-full bg-blue-400 shrink-0" />
+                        <span className="text-sm font-medium text-slate-700 group-hover:text-blue-600 transition-colors flex-1">
+                          {blog.title}
+                        </span>
+                        <ArrowRight size={13} className="text-slate-300 group-hover:text-blue-400 transition-colors shrink-0" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Sidebar */}
@@ -156,7 +293,7 @@ export default async function ServiceDetailPage(props: { params: Params }) {
                   Book a Consultation
                 </h3>
                 <p className="text-blue-100 text-sm mb-5">
-                  Don't let symptoms go undiagnosed. Speak with Dr. Sahu today.
+                  Don't let symptoms go undiagnosed. Speak with Dr. Sahu today at SAI SHREE HEALTH CARE, Cuttack.
                 </p>
                 <a
                   href={`https://wa.me/917008512773?text=${encodeURIComponent(`Hello, I want to book an appointment for ${service?.title || 'a Consultation'}.`)}`}
@@ -186,11 +323,18 @@ export default async function ServiceDetailPage(props: { params: Params }) {
                   <div>
                     <p className="font-bold text-slate-800 text-sm">{doctor.name}</p>
                     <p className="text-xs text-slate-500">{doctor.qualifications}</p>
+                    <p className="text-xs text-primary-600 font-medium mt-0.5">Assistant Professor of Endocrinology</p>
                   </div>
                 </div>
                 <p className="text-xs text-slate-500 leading-relaxed">
                   {doctor.clinicName}, {doctor.address}
                 </p>
+                <Link
+                  href="/about"
+                  className="text-xs text-blue-600 font-semibold mt-3 inline-flex items-center gap-1 hover:gap-2 transition-all"
+                >
+                  View Full Profile <ArrowRight size={11} />
+                </Link>
               </div>
 
               {/* Other services */}

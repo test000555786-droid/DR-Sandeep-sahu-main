@@ -3,10 +3,45 @@ import Link from "next/link";
 import { BookOpen, Calendar, Clock, ArrowRight, Tag } from "lucide-react";
 import { blogs } from "@/data/index";
 
+const BASE_URL = "https://drsandeepkumarsahu.com";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL },
+    { "@type": "ListItem", "position": 2, "name": "Health Blog", "item": `${BASE_URL}/blogs` },
+  ],
+};
+
 export const metadata: Metadata = {
-  title: "Health Blog | Endocrinology & Diabetes Education | Dr. Sandeep K. Sahu",
+  title: "Health Blog | Endocrinology, Diabetes & Hormonal Health | Dr. Sandeep K. Sahu, Cuttack",
   description:
-    "Expert articles on diabetes, thyroid health, PCOS, obesity and hormonal disorders by Dr. Sandeep K. Sahu — Endocrinologist in Cuttack.",
+    "Evidence-based articles on diabetes, thyroid health, PCOS, obesity and hormonal disorders by Dr. Sandeep K. Sahu — leading Endocrinologist in Cuttack, Odisha. Stay informed, stay healthy.",
+  keywords: [
+    "endocrinology blog Cuttack",
+    "diabetes health tips Cuttack",
+    "thyroid health Odisha",
+    "PCOS information Cuttack",
+    "hormonal health blog India",
+    "Dr Sandeep Sahu health blog",
+  ],
+  alternates: {
+    canonical: `${BASE_URL}/blogs`,
+  },
+  openGraph: {
+    url: `${BASE_URL}/blogs`,
+    title: "Health Blog | Endocrinology, Diabetes & Hormonal Health | Dr. Sandeep K. Sahu",
+    description:
+      "Evidence-based articles on diabetes, thyroid health, PCOS & hormonal disorders by Dr. Sandeep K. Sahu — Endocrinologist in Cuttack, Odisha.",
+    images: [{ url: "/images/hero-blogs.jpg", width: 1200, height: 630, alt: "Health Blog – Dr. Sandeep K. Sahu, Endocrinologist Cuttack" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Health Blog | Endocrinology & Diabetes | Dr. Sandeep K. Sahu, Cuttack",
+    description: "Expert health articles on Diabetes, Thyroid, PCOS & Hormonal disorders by Dr. Sandeep K. Sahu, Endocrinologist in Cuttack.",
+    images: ["/images/hero-blogs.jpg"],
+  },
 };
 
 const categories = ["All", "Diabetes", "Thyroid", "PCOS", "Obesity", "General"];
@@ -25,6 +60,10 @@ export default function BlogsPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* Hero */}
       <section className="page-hero">
         <div className="absolute inset-0 hero-bg" />

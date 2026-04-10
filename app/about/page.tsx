@@ -8,15 +8,69 @@ import {
 import { doctor } from "@/data/doctor";
 import CTASection from "@/components/sections/CTASection";
 
+const BASE_URL = "https://drsandeepkumarsahu.com";
+
+const physicianSchema = {
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  "@id": `${BASE_URL}/#doctor`,
+  "name": "Dr. Sandeep K. Sahu",
+  "url": `${BASE_URL}/about`,
+  "image": `${BASE_URL}/images/hero-about.png`,
+  "jobTitle": "Assistant Professor of Endocrinology",
+  "description": "Dr. Sandeep K. Sahu is a highly experienced Endocrinologist and Assistant Professor of Endocrinology at S.C.B. Medical College and Hospital, Cuttack, with over a decade of specialised clinical experience serving patients across Cuttack and Odisha.",
+  "medicalSpecialty": "Endocrinology",
+  "hasCredential": [
+    { "@type": "EducationalOccupationalCredential", "name": "MBBS", "recognizedBy": { "@type": "Organization", "name": "S.C.B Medical College, Cuttack" } },
+    { "@type": "EducationalOccupationalCredential", "name": "MD (Medicine)", "recognizedBy": { "@type": "Organization", "name": "S.C.B Medical College, Cuttack" } },
+    { "@type": "EducationalOccupationalCredential", "name": "DM (Endocrinology)", "recognizedBy": { "@type": "Organization", "name": "S.C.B Medical College, Cuttack" } }
+  ],
+  "worksFor": [
+    { "@type": "MedicalClinic", "name": "SAI SHREE HEALTH CARE", "address": { "@type": "PostalAddress", "streetAddress": "Near Shreema Hospital, Ring Road, Mangalabag", "addressLocality": "Cuttack", "addressRegion": "Odisha", "postalCode": "753001", "addressCountry": "IN" } },
+    { "@type": "EducationalOrganization", "name": "S.C.B. Medical College and Hospital, Cuttack" }
+  ],
+  "telephone": "+91-7008512773"
+};
+
 export const metadata: Metadata = {
-  title: "About Dr. Sandeep K. Sahu – DM Endocrinologist, Cuttack",
+  title: "About Dr. Sandeep K. Sahu – DM Endocrinologist & Assistant Professor, Cuttack",
   description:
-    "Learn about Dr. Sandeep K. Sahu's qualifications (MBBS, MD, DM Endocrinology), expertise, and philosophy of patient care at SAI SHREE HEALTH CARE, Cuttack.",
+    "Dr. Sandeep K. Sahu – MBBS, MD, DM (Endocrinology) & Assistant Professor at S.C.B. Medical College, Cuttack. Over a decade of expert endocrinology practice serving patients across Cuttack and Odisha at SAI SHREE HEALTH CARE.",
+  keywords: [
+    "Dr Sandeep Sahu endocrinologist Cuttack",
+    "DM endocrinology Cuttack",
+    "endocrinologist biography Cuttack",
+    "S.C.B. Medical College endocrinologist",
+    "best endocrinologist Odisha",
+    "Assistant Professor Endocrinology Cuttack",
+  ],
+  alternates: {
+    canonical: `${BASE_URL}/about`,
+  },
+  openGraph: {
+    type: "profile",
+    url: `${BASE_URL}/about`,
+    title: "About Dr. Sandeep K. Sahu – DM Endocrinologist & Assistant Professor, S.C.B. Medical College, Cuttack",
+    description:
+      "Learn about Dr. Sandeep K. Sahu's qualifications (MBBS, MD, DM Endocrinology), his role as Assistant Professor at S.C.B. Medical College, and his philosophy of patient care at SAI SHREE HEALTH CARE, Cuttack.",
+    images: [{ url: "/images/hero-about.png", width: 1200, height: 630, alt: "Dr. Sandeep K. Sahu – Endocrinologist in Cuttack, Odisha" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Dr. Sandeep K. Sahu – DM Endocrinologist, Cuttack",
+    description: "MBBS, MD, DM Endocrinology & Assistant Professor at S.C.B. Medical College, Cuttack. Expert endocrine care at SAI SHREE HEALTH CARE.",
+    images: ["/images/hero-about.png"],
+  },
 };
 
 export default function AboutPage() {
   return (
     <>
+      {/* Physician JSON-LD — page-level schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(physicianSchema) }}
+      />
       {/* Page Hero */}
       <section className="page-hero">
         <div className="absolute inset-0 hero-bg" />

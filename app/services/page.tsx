@@ -5,10 +5,46 @@ import { services } from "@/data/services";
 import CTASection from "@/components/sections/CTASection";
 import ServicesGridInteractive from "@/components/sections/ServicesGridInteractive";
 
+const BASE_URL = "https://drsandeepkumarsahu.com";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": `${BASE_URL}/services` },
+  ],
+};
+
 export const metadata: Metadata = {
-  title: "Endocrinology Services in Cuttack | Dr. Sandeep K. Sahu",
+  title: "Endocrinology Services in Cuttack | Diabetes, Thyroid, PCOS & More | Dr. Sandeep K. Sahu",
   description:
-    "Comprehensive endocrine services: Diabetes, Thyroid, PCOS, Obesity, Growth Disorders & Metabolic conditions. Expert care by Dr. Sandeep K. Sahu in Cuttack.",
+    "Comprehensive endocrinology services in Cuttack: Diabetes management, Thyroid disorders, PCOS treatment, Obesity management, Growth disorders & Metabolic conditions. Expert care by Dr. Sandeep K. Sahu at SAI SHREE HEALTH CARE.",
+  keywords: [
+    "endocrinology services Cuttack",
+    "diabetes treatment Cuttack",
+    "thyroid treatment Cuttack",
+    "PCOS treatment Cuttack",
+    "obesity management Cuttack",
+    "growth disorder treatment Odisha",
+    "metabolic disorder specialist Cuttack",
+  ],
+  alternates: {
+    canonical: `${BASE_URL}/services`,
+  },
+  openGraph: {
+    url: `${BASE_URL}/services`,
+    title: "Endocrinology Services in Cuttack | Dr. Sandeep K. Sahu",
+    description:
+      "Expert endocrine care for Diabetes, Thyroid, PCOS, Obesity, Growth Disorders & Metabolic conditions in Cuttack, Odisha. Book a consultation with Dr. Sandeep K. Sahu.",
+    images: [{ url: "/images/hero-services.jpg", width: 1200, height: 630, alt: "Endocrinology Services – Dr. Sandeep K. Sahu, Cuttack" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Endocrinology Services in Cuttack | Dr. Sandeep K. Sahu",
+    description: "Expert care for Diabetes, Thyroid, PCOS, Obesity & Metabolic disorders in Cuttack. Book now at SAI SHREE HEALTH CARE.",
+    images: ["/images/hero-services.jpg"],
+  },
 };
 
 const iconMap: Record<string, any> = {
@@ -23,6 +59,10 @@ const iconMap: Record<string, any> = {
 export default function ServicesPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* Hero */}
       <section className="page-hero">
         <div className="absolute inset-0 hero-bg" />

@@ -6,6 +6,8 @@ import { ChevronLeft, Calendar, Clock, BookOpen, ArrowRight, User } from "lucide
 import { blogs } from "@/data/index";
 import { doctor } from "@/data/doctor";
 
+const BASE_URL = "https://drsandeepkumarsahu.com";
+
 export async function generateStaticParams() {
   return blogs.map((b) => ({ slug: b.slug }));
 }
@@ -16,9 +18,45 @@ export async function generateMetadata(props: { params: Params }): Promise<Metad
   const params = await props.params;
   const blog = blogs.find((b) => b.slug === params.slug);
   if (!blog) return { title: "Blog Not Found" };
+
+  const canonicalUrl = `${BASE_URL}/blogs/${blog.slug}`;
+
   return {
-    title: blog.title,
+    title: `${blog.title} | Dr. Sandeep K. Sahu – Endocrinologist Cuttack`,
     description: blog.excerpt,
+    keywords: [
+      blog.category,
+      `${blog.category.toLowerCase()} Cuttack`,
+      `${blog.category.toLowerCase()} Odisha`,
+      "endocrinologist Cuttack",
+      "Dr Sandeep Sahu",
+    ],
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      type: "article",
+      url: canonicalUrl,
+      title: blog.title,
+      description: blog.excerpt,
+      publishedTime: blog.date,
+      authors: [doctor.name],
+      tags: [blog.category, "Endocrinology", "Cuttack", "Odisha"],
+      images: [
+        {
+          url: blog.image || "/images/hero-blogs.jpg",
+          width: 1200,
+          height: 630,
+          alt: blog.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: blog.title,
+      description: blog.excerpt,
+      images: [blog.image || "/images/hero-blogs.jpg"],
+    },
   };
 }
 
@@ -32,8 +70,7 @@ const categoryColors: Record<string, string> = {
 
 export default async function BlogDetailPage(props: { params: Params }) {
   const params = await props.params;
-  console.log("SLUG:", params.slug);
-  
+
   const blog = blogs.find((b) => b.slug === params.slug);
   if (!blog) notFound();
 
@@ -41,8 +78,61 @@ export default async function BlogDetailPage(props: { params: Params }) {
   const fallbackRelated = blogs.filter((b) => b.slug !== params.slug).slice(0, 3);
   const relatedPosts = related.length >= 2 ? related : fallbackRelated;
 
+  const canonicalUrl = `${BASE_URL}/blogs/${blog.slug}`;
+
+  // Article + BreadcrumbList JSON-LD
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `${canonicalUrl}#article`,
+        "headline": blog.title,
+        "description": blog.excerpt,
+        "url": canonicalUrl,
+        "datePublished": blog.date,
+        "dateModified": blog.date,
+        "author": {
+          "@type": "Physician",
+          "@id": `${BASE_URL}/#doctor`,
+          "name": doctor.name,
+          "url": `${BASE_URL}/about`,
+        },
+        "publisher": {
+          "@type": "MedicalClinic",
+          "@id": `${BASE_URL}/#clinic`,
+          "name": "SAI SHREE HEALTH CARE",
+          "logo": {
+            "@type": "ImageObject",
+            "url": `${BASE_URL}/images/home-hero.png`,
+          },
+        },
+        "image": blog.image ? `${BASE_URL}${blog.image}` : `${BASE_URL}/images/hero-blogs.jpg`,
+        "articleSection": blog.category,
+        "keywords": `${blog.category}, endocrinology, Cuttack, Odisha, Dr Sandeep Sahu`,
+        "about": {
+          "@type": "MedicalCondition",
+          "name": blog.category,
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL },
+          { "@type": "ListItem", "position": 2, "name": "Health Blog", "item": `${BASE_URL}/blogs` },
+          { "@type": "ListItem", "position": 3, "name": blog.title, "item": canonicalUrl },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+
       {/* Hero */}
       <section className="page-hero">
         <div className="absolute inset-0 hero-bg" />
@@ -112,16 +202,16 @@ export default async function BlogDetailPage(props: { params: Params }) {
                   {blog.content}
                 </p>
                 <p className="text-slate-600 leading-relaxed mb-5">
-                  Managing hormonal conditions requires a comprehensive approach that addresses not just the symptoms but the underlying causes. Dr. Sahu's expertise in endocrinology ensures that every patient receives an accurate diagnosis followed by a personalized treatment plan.
+                  Managing hormonal conditions requires a comprehensive approach that addresses not just the symptoms but the underlying causes. As an <strong>Assistant Professor of Endocrinology at S.C.B. Medical College and Hospital, Cuttack</strong>, Dr. Sahu combines academic expertise with hands-on clinical experience — ensuring every patient across Cuttack and Odisha receives an accurate diagnosis followed by a personalised treatment plan.
                 </p>
                 <h2 className="text-2xl font-bold text-slate-900 mb-4 font-heading">
                   When Should You Seek Medical Help?
                 </h2>
                 <p className="text-slate-600 leading-relaxed mb-5">
-                  If you are experiencing any of the symptoms described in this article, it is important to consult a qualified endocrinologist promptly. Early intervention leads to significantly better outcomes and helps prevent complications.
+                  If you are experiencing any of the symptoms described in this article, it is important to consult a qualified endocrinologist promptly. Early intervention leads to significantly better outcomes and helps prevent complications. Patients across Cuttack, Bhubaneswar, Kendrapara, and all of Odisha can access expert endocrine care at SAI SHREE HEALTH CARE.
                 </p>
                 <p className="text-slate-600 leading-relaxed mb-5">
-                  At SAI SHREE HEALTH CARE, Dr. Sahu and his team are dedicated to providing the most current, evidence-based treatments for all endocrine conditions. We welcome patients from Cuttack and across Odisha.
+                  At <strong>SAI SHREE HEALTH CARE</strong>, Near Shreema Hospital, Ring Road, Mangalabag, Cuttack, Dr. Sahu and his team are dedicated to providing the most current, evidence-based treatments for all endocrine conditions. Call <strong>+91 7008512773</strong> or visit us Monday to Saturday between 10 AM – 2 PM and 5 PM – 8 PM.
                 </p>
 
                 <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 my-8">
@@ -139,7 +229,8 @@ export default async function BlogDetailPage(props: { params: Params }) {
                 </div>
                 <div>
                   <p className="font-bold text-slate-800 font-heading">{doctor.name}</p>
-                  <p className="text-blue-600 text-sm mb-2">{doctor.qualifications}</p>
+                  <p className="text-blue-600 text-sm mb-1">{doctor.qualifications}</p>
+                  <p className="text-primary-600 text-xs font-medium mb-2">Assistant Professor of Endocrinology, S.C.B. Medical College, Cuttack</p>
                   <p className="text-slate-500 text-sm leading-relaxed">{doctor.bio}</p>
                   <Link href="/about" className="text-blue-600 text-sm font-semibold mt-2 inline-flex items-center gap-1 hover:gap-2 transition-all">
                     View Full Profile <ArrowRight size={13} />
@@ -151,7 +242,7 @@ export default async function BlogDetailPage(props: { params: Params }) {
             {/* Sidebar */}
             <aside className="space-y-6 lg:space-y-8">
               {/* Book CTA */}
-              <div 
+              <div
                 className="p-6 md:p-8 overflow-visible rounded-2xl shadow-xl transition-all hover:shadow-2xl bg-gradient-animated"
                 style={{ background: 'var(--gradient-hero)', color: 'white' }}
               >

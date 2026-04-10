@@ -97,7 +97,7 @@ export default function Navbar() {
             </div>
 
             <a
-              href={`https://wa.me/917008512773?text=${encodeURIComponent("Hello, I want to book an appointment.")}`}
+              href={`https://wa.me/917008512773?text=${encodeURIComponent("Hello, I want to book an appointment with Dr. Sandeep k Sahu.")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-gradient-animated text-white text-[13px] font-bold px-6 py-2.5 rounded-full transition-all duration-300 shadow-blue hover:-translate-y-0.5 group"
@@ -148,7 +148,7 @@ export default function Navbar() {
               ))}
               <div className="pt-2 mt-1 border-t border-slate-100">
                 <a
-                  href={`https://wa.me/917008512773?text=${encodeURIComponent("Hello, I want to book an appointment.")}`}
+                  href={`https://wa.me/917008512773?text=${encodeURIComponent("Hello, I want to book an appointment with Dr. Sandeep k Sahu.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full bg-gradient-animated text-white font-bold py-3.5 rounded-xl shadow-blue active:scale-[0.98] transition-transform"

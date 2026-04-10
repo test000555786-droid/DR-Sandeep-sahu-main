@@ -27,7 +27,7 @@ export default function Footer() {
                 Call Now
               </a>
               <a
-                href={`https://wa.me/917008512773?text=${encodeURIComponent("Hello, I want to book an appointment.")}`}
+                href={`https://wa.me/917008512773?text=${encodeURIComponent("Hello, I want to book an appointment with Dr. Sandeep k Sahu.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 bg-[#25D366] text-white font-semibold px-6 py-3 rounded-full hover:bg-[#20bd5a] transition-colors text-sm shadow-md"
